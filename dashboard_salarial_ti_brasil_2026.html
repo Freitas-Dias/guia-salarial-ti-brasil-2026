@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Salarial TI Brasil 2026</title>
+<meta name="description" content="Faixas salariais de TI no Brasil em 2026 por área, nível e região. Dados de mercado para Cibersegurança, IA, Cloud, DevOps, Dados e mais.">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --bg2: #f5f5f3; --bg3: #eeede8;
+    --text: #1a1a18; --text2: #6b6a65; --text3: #9b9a96;
+    --border: rgba(0,0,0,0.12); --border2: rgba(0,0,0,0.22);
+    --info-bg: #e6f1fb; --info-text: #185fa5; --info-border: #b5d4f4;
+    --radius: 8px; --radius-lg: 12px;
+    --C_MIN: #378ADD; --C_MED: #1D9E75; --C_MAX: #7F77DD;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a; --bg2: #252523; --bg3: #2e2e2b;
+      --text: #f0efe9; --text2: #a8a79f; --text3: #6e6d68;
+      --border: rgba(255,255,255,0.12); --border2: rgba(255,255,255,0.22);
+      --info-bg: #0c2240; --info-text: #85b7eb; --info-border: #185fa5;
+    }
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg3); color: var(--text); min-height: 100vh; padding: 24px 16px; }
+  .page { max-width: 860px; margin: 0 auto; }
+  .hero { background: var(--bg); border-radius: var(--radius-lg); border: 0.5px solid var(--border); padding: 28px 32px 20px; margin-bottom: 16px; }
+  .hero h1 { font-size: 22px; font-weight: 500; }
+  .hero p { font-size: 14px; color: var(--text2); margin-top: 6px; }
+  .badge { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 99px; background: var(--info-bg); color: var(--info-text); border: 0.5px solid var(--info-border); margin-top: 10px; }
+  .card { background: var(--bg); border-radius: var(--radius-lg); border: 0.5px solid var(--border); padding: 20px 24px; margin-bottom: 16px; }
+  .tabs { display: flex; border-bottom: 0.5px solid var(--border); margin-bottom: 20px; }
+  .tab { font-size: 13px; padding: 8px 16px; cursor: pointer; color: var(--text2); border-bottom: 2px solid transparent; margin-bottom: -0.5px; transition: all .15s; }
+  .tab.active { color: var(--text); border-bottom-color: var(--text); font-weight: 500; }
+  .pill-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .pill { font-size: 12px; padding: 4px 12px; border-radius: 99px; border: 0.5px solid var(--border2); cursor: pointer; background: var(--bg); color: var(--text2); transition: all .15s; }
+  .pill.active { background: var(--info-bg); color: var(--info-text); border-color: var(--info-border); }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 20px; }
+  .metric { background: var(--bg2); border-radius: var(--radius); padding: 10px 12px; }
+  .metric-label { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: .04em; }
+  .metric-value { font-size: 20px; font-weight: 500; margin-top: 3px; }
+  .metric-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .section-title { font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 10px; }
+  .legend-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
+  .leg-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text2); }
+  .leg-sq { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .bar-label { font-size: 12px; color: var(--text2); min-width: 130px; text-align: right; flex-shrink: 0; }
+  .bar-wrap { flex: 1; display: flex; flex-direction: column; gap: 4px; padding-right: 72px; }
+  .bar-seg { display: flex; align-items: center; gap: 6px; height: 14px; }
+  .bar-fill { height: 11px; border-radius: 99px; min-width: 4px; transition: width .35s ease; }
+  .bar-txt { font-size: 10px; color: var(--text2); white-space: nowrap; }
+  .reg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 10px; margin-bottom: 16px; }
+  .reg-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 12px 14px; cursor: pointer; transition: border-color .15s; }
+  .reg-card:hover { border-color: var(--border2); }
+  .reg-card.sel { border: 1.5px solid var(--info-border); }
+  .reg-name { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+  .reg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .reg-states { font-size: 11px; color: var(--text2); margin-top: 3px; }
+  .reg-med { font-size: 16px; font-weight: 500; margin-top: 6px; }
+  .reg-range { font-size: 11px; color: var(--text3); }
+  .divider { border: none; border-top: 0.5px solid var(--border); margin: 16px 0; }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .compare-table th { font-size: 11px; font-weight: 500; color: var(--text2); text-align: left; padding: 7px 8px; border-bottom: 0.5px solid var(--border); }
+  .compare-table td { padding: 7px 8px; border-bottom: 0.5px solid var(--border); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .heat-cell { border-radius: 4px; padding: 4px 6px; font-weight: 500; text-align: center; }
+  .footer { text-align: center; font-size: 11px; color: var(--text3); margin-top: 24px; padding-bottom: 16px; }
+  .source-note { font-size: 11px; color: var(--text3); margin-top: 12px; line-height: 1.6; }
+  @media (max-width: 600px) {
+    .hero { padding: 20px 16px 16px; }
+    .card { padding: 16px; }
+    .bar-label { min-width: 90px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <h1>Guia Salarial TI Brasil 2026</h1>
+    <p>Faixas salariais brutas mensais por área, nível e região — referência de mercado nacional.</p>
+    <span class="badge">Atualizado 2026 · CLT · Mercado formal</span>
+  </div>
+
+  <div class="card">
+    <div class="tabs">
+      <div class="tab active" data-tab="areas">Por área</div>
+      <div class="tab" data-tab="regioes">Por região</div>
+      <div class="tab" data-tab="comparar">Comparar</div>
+    </div>
+
+    <!-- TAB AREAS -->
+    <div id="tab-areas">
+      <div class="pill-row" id="levelPillsA">
+        <div class="pill active" data-level="all">Todos os níveis</div>
+        <div class="pill" data-level="0">Júnior</div>
+        <div class="pill" data-level="1">Pleno</div>
+        <div class="pill" data-level="2">Sênior</div>
+        <div class="pill" data-level="3">Lead / Especialista</div>
+      </div>
+      <div class="pill-row" id="regPillsA">
+        <div class="pill active" data-reg="BR">Brasil (nacional)</div>
+        <div class="pill" data-reg="SE">Sudeste</div>
+        <div class="pill" data-reg="S">Sul</div>
+        <div class="pill" data-reg="CO">Centro-Oeste</div>
+        <div class="pill" data-reg="NE">Nordeste</div>
+        <div class="pill" data-reg="N">Norte</div>
+      </div>
+      <div class="summary-grid" id="summaryA"></div>
+      <div class="section-title">Faixa salarial por área</div>
+      <div class="legend-row">
+        <span class="leg-item"><span class="leg-sq" style="background:#378ADD"></span>Mínimo</span>
+        <span class="leg-item"><span class="leg-sq" style="background:#1D9E75"></span>Mediana</span>
+        <span class="leg-item"><span class="leg-sq" style="background:#7F77DD"></span>Máximo</span>
+      </div>
+      <div id="barsA"></div>
+    </div>
+
+    <!-- TAB REGIOES -->
+    <div id="tab-regioes" style="display:none">
+      <div class="pill-row" id="levelPillsR">
+        <div class="pill active" data-level="all">Todos os níveis</div>
+        <div class="pill" data-level="0">Júnior</div>
+        <div class="pill" data-level="1">Pleno</div>
+        <div class="pill" data-level="2">Sênior</div>
+        <div class="pill" data-level="3">Lead / Especialista</div>
+      </div>
+      <div class="summary-grid" id="summaryR"></div>
+      <div class="section-title">Selecione uma região para detalhar por área</div>
+      <div class="reg-grid" id="regCards"></div>
+      <div id="regDetail" style="display:none">
+        <div class="divider"></div>
+        <div class="section-title" id="regDetailTitle"></div>
+        <div class="legend-row">
+          <span class="leg-item"><span class="leg-sq" style="background:#378ADD"></span>Mínimo</span>
+          <span class="leg-item"><span class="leg-sq" style="background:#1D9E75"></span>Mediana</span>
+          <span class="leg-item"><span class="leg-sq" style="background:#7F77DD"></span>Máximo</span>
+        </div>
+        <div id="regDetailBars"></div>
+      </div>
+    </div>
+
+    <!-- TAB COMPARAR -->
+    <div id="tab-comparar" style="display:none">
+      <div class="pill-row" id="levelPillsC">
+        <div class="pill active" data-level="all">Todos os níveis</div>
+        <div class="pill" data-level="0">Júnior</div>
+        <div class="pill" data-level="1">Pleno</div>
+        <div class="pill" data-level="2">Sênior</div>
+        <div class="pill" data-level="3">Lead / Especialista</div>
+      </div>
+      <div class="section-title">Mediana por área e região — mapa de calor (R$ mil)</div>
+      <div style="overflow-x:auto;margin-top:6px;">
+        <table class="compare-table" id="heatTable"></table>
+      </div>
+      <p style="font-size:11px;color:var(--text3);margin-top:10px;">Cor indica intensidade salarial: azul escuro = maior mediana. Valores em R$ mil.</p>
+    </div>
+
+    <p class="source-note">
+      Fontes de referência: Robert Half Salary Guide 2025–26 · Glassdoor Brasil · Revelo Salary Report · pesquisas ABES/Brasscom.<br>
+      Valores aproximados de mercado para regime CLT. Empresas de tecnologia e multinacionais tendem a pagar 20–40% acima. Regime PJ adiciona ~30–50% ao equivalente CLT.
+    </p>
+  </div>
+
+  <div class="footer">Guia Salarial TI Brasil 2026 · Dados de mercado compilados para fins educacionais</div>
+</div>
+
+<script>
+const C_MIN='#378ADD', C_MED='#1D9E75', C_MAX='#7F77DD';
+const regioes=[
+  {id:'SE',name:'Sudeste',      color:'#378ADD',states:'SP · RJ · MG · ES',      mult:1.00},
+  {id:'S', name:'Sul',          color:'#1D9E75',states:'RS · SC · PR',            mult:0.88},
+  {id:'CO',name:'Centro-Oeste', color:'#7F77DD',states:'DF · GO · MT · MS',       mult:0.82},
+  {id:'NE',name:'Nordeste',     color:'#BA7517',states:'BA · PE · CE · e outros', mult:0.68},
+  {id:'N', name:'Norte',        color:'#D85A30',states:'AM · PA · e outros',      mult:0.62},
+];
+const areas=[
+  {id:'ia',    name:'IA & Machine Learning',  levels:[{min:4000,med:6000,max:8500},{min:8000,med:12000,max:17000},{min:15000,med:21000,max:30000},{min:22000,med:32000,max:50000}]},
+  {id:'dados', name:'Ciência de Dados',       levels:[{min:3800,med:5500,max:7500},{min:7000,med:10000,max:14000},{min:13000,med:18000,max:25000},{min:20000,med:28000,max:40000}]},
+  {id:'gestao',name:'Gestão TI / Product',    levels:[{min:3000,med:5000,max:7000},{min:6500,med:10000,max:14000},{min:12000,med:18000,max:26000},{min:18000,med:28000,max:42000}]},
+  {id:'seg',   name:'Cibersegurança',         levels:[{min:3500,med:5000,max:7000},{min:6500,med:9000,max:13000},{min:12000,med:16000,max:22000},{min:18000,med:25000,max:35000}]},
+  {id:'cloud', name:'Cloud Computing',        levels:[{min:3500,med:5000,max:7000},{min:6500,med:9500,max:13500},{min:12000,med:17000,max:24000},{min:18000,med:26000,max:38000}]},
+  {id:'devops',name:'DevOps / SRE',           levels:[{min:3200,med:4800,max:6500},{min:6500,med:9500,max:13000},{min:12000,med:17000,max:24000},{min:18000,med:26000,max:38000}]},
+  {id:'dev',   name:'Desenvolvimento',        levels:[{min:2800,med:4000,max:6000},{min:5500,med:8000,max:11500},{min:10000,med:15000,max:22000},{min:16000,med:23000,max:35000}]},
+  {id:'redes', name:'Redes & Infraestrutura', levels:[{min:2500,med:3800,max:5500},{min:4500,med:7000,max:10000},{min:8000,med:12000,max:18000},{min:13000,med:19000,max:28000}]},
+];
+function applyMult(v,r){if(r==='BR')return v;const x=regioes.find(z=>z.id===r);return Math.round(v*(x?x.mult:1));}
+function getLevels(a,l,r){
+  if(l==='all'){const mi=a.levels.map(x=>applyMult(x.min,r)),me=a.levels.map(x=>applyMult(x.med,r)),ma=a.levels.map(x=>applyMult(x.max,r));return{min:Math.min(...mi),med:Math.round(me.reduce((a,b)=>a+b)/me.length),max:Math.max(...ma)};}
+  const i=parseInt(l);return{min:applyMult(a.levels[i].min,r),med:applyMult(a.levels[i].med,r),max:applyMult(a.levels[i].max,r)};
+}
+function fmtK(v){return v>=1000?'R$\u00a0'+(v/1000).toFixed(0)+'k':'R$\u00a0'+v;}
+function renderBars(el,rows,maxV){
+  el.innerHTML='';
+  rows.forEach(r=>{
+    const pn=(r.min/maxV*100).toFixed(1),pm=(r.med/maxV*100).toFixed(1),px=(r.max/maxV*100).toFixed(1);
+    el.innerHTML+=`<div class="bar-row"><div class="bar-label">${r.label}</div><div class="bar-wrap">
+      <div class="bar-seg"><div class="bar-fill" style="width:${pn}%;background:${C_MIN}"></div><span class="bar-txt">${fmtK(r.min)}</span></div>
+      <div class="bar-seg"><div class="bar-fill" style="width:${pm}%;background:${C_MED}"></div><span class="bar-txt">${fmtK(r.med)}</span></div>
+      <div class="bar-seg"><div class="bar-fill" style="width:${px}%;background:${C_MAX}"></div><span class="bar-txt">${fmtK(r.max)}</span></div>
+    </div></div>`;
+  });
+}
+let sA={lvl:'all',reg:'BR'},sR={lvl:'all',sel:null},sC={lvl:'all'};
+function renderTabA(){
+  const rows=areas.map(a=>{const d=getLevels(a,sA.lvl,sA.reg);return{...d,label:a.name};}).sort((a,b)=>b.med-a.med);
+  const maxV=Math.max(...rows.map(r=>r.max));
+  const aMin=Math.round(rows.reduce((s,r)=>s+r.min,0)/rows.length);
+  const aMed=Math.round(rows.reduce((s,r)=>s+r.med,0)/rows.length);
+  const aMax=Math.round(rows.reduce((s,r)=>s+r.max,0)/rows.length);
+  const rL=sA.reg==='BR'?'Nacional':regioes.find(r=>r.id===sA.reg).name;
+  const lL={all:'todos os níveis',0:'Júnior',1:'Pleno',2:'Sênior',3:'Lead/Especialista'}[sA.lvl];
+  document.getElementById('summaryA').innerHTML=`
+    <div class="metric"><div class="metric-label">Mín. médio</div><div class="metric-value">${fmtK(aMin)}</div><div class="metric-sub">${rL}</div></div>
+    <div class="metric"><div class="metric-label">Mediana média</div><div class="metric-value">${fmtK(aMed)}</div><div class="metric-sub">${rL}</div></div>
+    <div class="metric"><div class="metric-label">Máx. médio</div><div class="metric-value">${fmtK(aMax)}</div><div class="metric-sub">${rL}</div></div>
+    <div class="metric"><div class="metric-label">Nível</div><div class="metric-value" style="font-size:13px;margin-top:6px;">${lL}</div><div class="metric-sub">${rL}</div></div>`;
+  renderBars(document.getElementById('barsA'),rows,maxV);
+}
+function renderRegCards(){
+  const aMs=regioes.map(reg=>{const m=areas.map(a=>getLevels(a,sR.lvl,reg.id).med);return Math.round(m.reduce((a,b)=>a+b)/m.length);});
+  const bm=areas.map(a=>getLevels(a,sR.lvl,'BR').med);
+  const bA=Math.round(bm.reduce((a,b)=>a+b)/bm.length);
+  const all=[{id:'BR',name:'Brasil (nacional)',color:'#2C2C2A',states:'Referência base',med:bA},...regioes.map((r,i)=>({...r,med:aMs[i]}))];
+  document.getElementById('summaryR').innerHTML=`
+    <div class="metric"><div class="metric-label">Maior mediana</div><div class="metric-value">${fmtK(Math.max(...aMs))}</div><div class="metric-sub">Sudeste</div></div>
+    <div class="metric"><div class="metric-label">Menor mediana</div><div class="metric-value">${fmtK(Math.min(...aMs))}</div><div class="metric-sub">Norte</div></div>
+    <div class="metric"><div class="metric-label">Gap SE – Norte</div><div class="metric-value">${Math.round((1-regioes[4].mult)*100)}%</div><div class="metric-sub">diferença regional</div></div>
+    <div class="metric"><div class="metric-label">Base nacional</div><div class="metric-value">${fmtK(bA)}</div><div class="metric-sub">mediana geral</div></div>`;
+  document.getElementById('regCards').innerHTML=all.map(r=>{
+    const d=areas.map(a=>getLevels(a,sR.lvl,r.id));
+    const mn=Math.min(...d.map(x=>x.min)),mx=Math.max(...d.map(x=>x.max));
+    return`<div class="reg-card${sR.sel===r.id?' sel':''}" onclick="selReg('${r.id}')">
+      <div class="reg-name"><span class="reg-dot" style="background:${r.color}"></span>${r.name}</div>
+      <div class="reg-states">${r.states}</div>
+      <div class="reg-med" style="color:${r.color}">${fmtK(r.med)}</div>
+      <div class="reg-range">mediana geral · ${fmtK(mn)} – ${fmtK(mx)}</div>
+    </div>`;}).join('');
+}
+function renderRegDetail(){
+  const sec=document.getElementById('regDetail');
+  if(!sR.sel){sec.style.display='none';return;}
+  sec.style.display='block';
+  const ro=sR.sel==='BR'?{id:'BR',name:'Brasil (nacional)'}:regioes.find(r=>r.id===sR.sel);
+  document.getElementById('regDetailTitle').textContent=ro.name+' — faixa salarial por área';
+  const rows=areas.map(a=>{const d=getLevels(a,sR.lvl,ro.id);return{...d,label:a.name};}).sort((a,b)=>b.med-a.med);
+  renderBars(document.getElementById('regDetailBars'),rows,Math.max(...rows.map(r=>r.max)));
+}
+function renderHeat(){
+  const rIds=['BR',...regioes.map(r=>r.id)],rNms=['Nacional','Sudeste','Sul','Centro-Oeste','Nordeste','Norte'];
+  const allV=[];areas.forEach(a=>rIds.forEach(r=>allV.push(getLevels(a,sC.lvl,r).med)));
+  const mn=Math.min(...allV),mx=Math.max(...allV);
+  function hc(v){const t=(v-mn)/(mx-mn);if(t>.75)return{bg:'#0C447C',tx:'#B5D4F4'};if(t>.5)return{bg:'#185FA5',tx:'#E6F1FB'};if(t>.25)return{bg:'#378ADD',tx:'#E6F1FB'};return{bg:'#85B7EB',tx:'#042C53'};}
+  let h=`<thead><tr><th>Área</th>${rNms.map(n=>`<th>${n}</th>`).join('')}</tr></thead><tbody>`;
+  areas.forEach(a=>{
+    h+=`<tr><td style="white-space:nowrap">${a.name}</td>`;
+    rIds.forEach(r=>{const v=getLevels(a,sC.lvl,r).med,c=hc(v);h+=`<td><div class="heat-cell" style="background:${c.bg};color:${c.tx}">${(v/1000).toFixed(0)}k</div></td>`;});
+    h+='</tr>';});
+  h+='</tbody>';document.getElementById('heatTable').innerHTML=h;
+}
+window.selReg=function(id){sR.sel=sR.sel===id?null:id;renderRegCards();renderRegDetail();};
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');
+  ['areas','regioes','comparar'].forEach(id=>document.getElementById('tab-'+id).style.display='none');
+  document.getElementById('tab-'+t.dataset.tab).style.display='block';
+}));
+function bindPills(id,cb){document.getElementById(id).addEventListener('click',e=>{const p=e.target.closest('.pill');if(!p)return;document.querySelectorAll('#'+id+' .pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');cb(p);});}
+bindPills('levelPillsA',p=>{sA.lvl=p.dataset.level;renderTabA();});
+bindPills('regPillsA',  p=>{sA.reg=p.dataset.reg;renderTabA();});
+bindPills('levelPillsR',p=>{sR.lvl=p.dataset.level;renderRegCards();renderRegDetail();});
+bindPills('levelPillsC',p=>{sC.lvl=p.dataset.level;renderHeat();});
+renderTabA();renderRegCards();renderRegDetail();renderHeat();
+</script>
+</body>
+</html>
