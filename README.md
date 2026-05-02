@@ -2,7 +2,7 @@
 
 Dashboard interativo com faixas salariais do mercado de Tecnologia da Informação no Brasil, com recorte por **área**, **nível de senioridade** e **região geográfica**.
 
-🔗 **[Acesse o dashboard ao vivo](https://Freitas-Dias.github.io/guia-salarial-ti-brasil-2026/)**
+🔗 **[Acesse o dashboard ao vivo](https://freitas-dias.github.io/guia-salarial-ti-brasil-2026/)**
 
 ---
 
