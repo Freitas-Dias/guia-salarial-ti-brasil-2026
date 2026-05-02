@@ -1,0 +1,1 @@
+# guia-salarial-ti-brasil-2026
